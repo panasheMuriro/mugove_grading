@@ -1,5 +1,5 @@
 import { StudentClass } from "./StudentClasses";
-
+const isBrowser = typeof window !== "undefined"
 export class DB {
     private name:string;
     private collections:object =  {};
@@ -11,14 +11,18 @@ export class DB {
       if(mock){
         this.localStorage = new LocalStorageMock();
       }else{
+        if(isBrowser){
         this.localStorage = localStorage;
+        }
       }
 
+      if(isBrowser){
       if(this.localStorage.getItem(this.name)){
          this.collections = JSON.parse(this.localStorage.getItem(this.name))
       }else{
           this.collections = {};
       }
+    }
     }
 
     getName():string {
@@ -55,6 +59,7 @@ export class DB {
     }
   
     updateDB():void {
+      if(isBrowser){
       let MugoveDB:string = this.localStorage.getItem(this.name);
       if (!MugoveDB) {
         this.localStorage.setItem(this.name, '{}');
@@ -64,6 +69,7 @@ export class DB {
       }
       this.localStorage.setItem(this.name, MugoveDB);
     }
+  }
  
   }
 
