@@ -3,6 +3,7 @@
 
 # [WIP] Mugove Grading
 
+![](https://img.shields.io/badge/version-1.0-blue)
 ## What it is
 
 A Progressive Web Application(PWA) which works entrirely offline as a smart calculator helping teachers to analyze their students' performance on a graded exercise.
