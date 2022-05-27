@@ -1,3 +1,5 @@
+@import "../styles/global.css";
+
 :root {
   --border-radius: 4px;
   --color-text: #333;
@@ -222,3 +224,90 @@ pre tt:before,
 pre tt:after {
   content: none;
 }
+
+.ant-select-selector{
+  height: 45px !important;
+  display: flex !important;
+  align-items: center;
+  background-color: #E8E8E859 !important;
+  border-radius: 10px !important;
+  border-color: #E8E8E859 !important;
+  font-family: "StolzlBook" !important;
+}
+
+.ant-select-item .ant-select-item-option{
+  font-family: "StolzlBook" !important;
+
+}
+
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector{
+  border-color: #E8E8E859 !important;
+  box-shadow: none;
+}
+
+.ant-radio-checked .ant-radio-inner{
+  border-color: #008080 !important;
+  color: red !important;
+}
+
+.ant-radio-inner::after{
+  background-color: #008080 !important;
+}
+th{
+  font-family: "StolzlMedium" !important;
+}
+
+.ant-pagination-item a{
+color: #008080 !important;
+border: #008080 !important;
+padding: 0 !important;
+margin: 0 !important;
+display: flex !important;
+align-items: center;
+justify-content: center;
+}
+
+.ant-pagination-item{
+  border-radius: 20px !important;
+}
+.ant-pagination-item-active{
+  outline: none;
+  border:solid 2px #008080 !important;
+  border-radius: 20px !important;
+  display: flex !important;
+  align-items: center;
+justify-content: center;
+  }
+
+.ant-pagination-item-link{
+  border-radius: 20px !important;
+}
+
+.ant-table-pagination-right{
+  justify-content: center !important;
+}
+
+.ant-popover-inner{
+  border-radius: 15px !important;
+}
+
+.primary_button{
+  background-color: #025b5b;
+}
+
+.text_button:active{
+  background-color: #E8E8E899;
+}
+
+.secondary_button:active{
+  background-color: #008080;
+  color: white;
+}
+
+.muted_button:active{
+  background-color: #E8E8E866;
+
+}
+/* .ant-popover-inner-content{
+  padding: 0 !important;
+} */
