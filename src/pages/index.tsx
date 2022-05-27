@@ -19,7 +19,7 @@ import AboutPage from '../components/UI/Pages/AboutPage'
 
 export default function MainPage() {
 
-  
+
   const [showAboutPage, setShowAboutPage] = useState(false);
   const [showSubNav, setShowSubNav] = useState(false);
   const [showSyllabusPage, setShowSyllabusPage] = useState(false);
@@ -66,7 +66,6 @@ export default function MainPage() {
   }
 
   const componentSwitched = (e) => {
-    document.getElementById("dismiss_tooltip").click()
 
     setTooltipVisible(false);
     setExerciseTooltipVisible(false)

@@ -38,7 +38,10 @@ export default function CardCollector(props) {
     useEffect(() => {
         if (props.modalVisible && props.cardType == CardTypes.STUDENT_CLASS) { // TODO: HANDLE THE EXERCISE CARD
             setModalVisible(true)
-            setAlreadyExists(true)
+            if(props.cardEditID){
+                setAlreadyExists(true)
+            }
+
             setTimeout(() => {
                 let studentClass = db.getCollection(props.cardEditID);
                 let currentValues = [{ label: "Title", value: studentClass.getTitle() }, { label: "Grade", value: studentClass.getGrade() }];
@@ -47,6 +50,7 @@ export default function CardCollector(props) {
         } else if (props.modalVisible && props.cardType == CardTypes.EXERCISE) {
             setModalVisible(true)
         }
+        console.log(props.cardEditID)
     }, [props.modalVisible])
 
     useEffect(() => {
@@ -96,6 +100,9 @@ export default function CardCollector(props) {
 
     const handleModalVisibility = (): void => {
         // animate__animated animate__zoomIn animate__faster
+        if(modalVisible){
+            setAlreadyExists(false);
+        }
         if (document.getElementById("modal")) {
             let currentClass = document.getElementById("modal").className;
             currentClass += " animate__animated animate__zoomOut animate__faster"
@@ -231,11 +238,12 @@ export default function CardCollector(props) {
                     <P2 style={{ marginTop: 8 }}> Click on the <b>+ add</b>  button to add "something"</P2>
                 </Card>}
 
-
+                
                 <Padding style={{ margin: "auto" }}>
-                    {limit < cards.length && <IconButton secondary down left title="See More" onClick={onSeeMore} />  }
+                {props.cardType == CardTypes.EXERCISE && limit < cards.length && <IconButton secondary down left title="See More" onClick={onSeeMore} />  }
+                {props.cardType == CardTypes.STUDENT_CLASS && limit < classCards.length && <IconButton secondary down left title="See More" onClick={onSeeMore} />  }
                 </Padding>
-                 <TextButton onClick={()=> {console.log("clicked")}} id="dismiss_tooltip"  style={{height: 20}}></TextButton>
+                 {/* <TextButton onClick={()=> {console.log("clicked")}} id="dismiss_tooltip"  style={{height: 20}}></TextButton> */}
             </FlexColumn>
         </Padding>
     )
