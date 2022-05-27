@@ -29,6 +29,7 @@ module.exports = {
         icon: `src/images/pwa_logo.png`, // This path is relative to the root of the site.
       },
     },
+
     {
       resolve: `gatsby-plugin-offline`,
       options: {
