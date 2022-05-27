@@ -19,6 +19,7 @@ import AboutPage from '../components/UI/Pages/AboutPage'
 
 export default function MainPage() {
 
+  
   const [showAboutPage, setShowAboutPage] = useState(false);
   const [showSubNav, setShowSubNav] = useState(false);
   const [showSyllabusPage, setShowSyllabusPage] = useState(false);
