@@ -79,3 +79,4 @@ test("Add a grading scheme to an exercise",()=>{
     studentClass.getExercises().modifyOneExercise(exercise.getID(), exercise)
     db.modifyCollection(studentClass.getID(), studentClass)
 })
+

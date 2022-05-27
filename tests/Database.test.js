@@ -15,3 +15,5 @@ test("Delete a collection", () => {
     db.removeCollection("Mathematics");
     expect(JSON.stringify(db.getCollections())).not.toMatch(/Mathematics/)
 })
+
+

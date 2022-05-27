@@ -243,3 +243,5 @@ test("Feedback on scores", () => {
   let x = feedback.getOverallFeedBack()
   expect(x).not.toBeUndefined()
 })
+
+
