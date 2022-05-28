@@ -79,6 +79,7 @@ export default function GradingSwitcher(props) {
             if (currentStudentIndex + 1 < students.length) {
                 setCurrentStudentIndex(currentStudentIndex + 1)
             }else{
+                document.getElementById(Pages.GRADE_STUDENTS_PAGE).scrollTo(0,0);
                  setShowPopup(true)
             }
             setCommentFieldVisible(0);

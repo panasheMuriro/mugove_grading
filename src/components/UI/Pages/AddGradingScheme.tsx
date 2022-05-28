@@ -184,6 +184,9 @@ export default function AddGradingScheme(props) {
         setQuestionID(e.target.id);
         let values = e.target.getAttribute("data-edit-value");
         FormHandler.editFormValues(JSON.parse(values));
+        if(values){
+            document.getElementById(Pages.ADD_GRADING_SCHEME).scrollTo(0,0);
+           } 
         let topics = e.target.getAttribute("data-topics");
         let topicTitles = [];
         topics = JSON.parse(topics)
@@ -243,7 +246,7 @@ export default function AddGradingScheme(props) {
             </Padding>
             <TableDisplay columns={columns} data={dataSource} />
             <Padding>
-                <PrimaryButton >Save</PrimaryButton>
+                <PrimaryButton onClick={props.onClick} >Save</PrimaryButton>
             </Padding>
 
         </Page>

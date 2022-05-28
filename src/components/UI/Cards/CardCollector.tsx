@@ -20,6 +20,7 @@ import { StudentClass } from '../../../classes/StudentClasses';
 import { instanceOf } from 'prop-types';
 import { Exercise, ExerciseType } from '../../../classes/Exercises';
 import Popup from '../Popup';
+import { Pages } from '../Pages/Page';
 export default function CardCollector(props) {
 
     let shouldDisplayClassCards: boolean = props.cardType == CardTypes.STUDENT_CLASS;
@@ -68,12 +69,14 @@ export default function CardCollector(props) {
 
     useEffect(() => {
         if (props.cardDeleteID) {
+            document.getElementById("main_page").scrollTo(0,0)
             setDeletePopupVisible(true);
         }
     }, [props.deleteTrigger])
 
     useEffect(() => {
         if (props.exerciseCardDeleteID) { //FIXME: this id is from the student class
+            document.getElementById(Pages.STUDENT_CLASS_PAGE).scrollTo(0,0)
             setExerciseDeletePopupVisible(true);
         }
     }, [props.exerciseDeleteTrigger])
@@ -95,7 +98,7 @@ export default function CardCollector(props) {
         studentClass.setExercises(exercises)
         db.modifyCollection(studentClass.getID(), studentClass);
         setExerciseDeletePopupVisible(false);
-        setFetchTrigger(Math.random())
+        setFetchTrigger(Math.random()) // FIXME: not working??
     }
 
     const handleModalVisibility = (): void => {
@@ -106,7 +109,6 @@ export default function CardCollector(props) {
         if (document.getElementById("modal")) {
             let currentClass = document.getElementById("modal").className;
             currentClass += " animate__animated animate__zoomOut animate__faster"
-            console.log()
             document.getElementById("modal").className = currentClass
             setTimeout(() => {
                 setModalVisible(!modalVisible);
@@ -184,14 +186,16 @@ export default function CardCollector(props) {
         let studentClassesObject = db.getCollections();
         let studentClassesArray: Array<StudentClass> = Object.values(studentClassesObject).map(x => StudentClass.fromJSON(x));
         if (shouldDisplayClassCards) {
+            studentClassesArray.reverse()
             setClassCards(studentClassesArray);
         } else if (shouldDisplayExerciseCards) {
             let studentClass = db.getCollection(props.id);
             let exercises = studentClass.getExercises();
             let currentExercises = exercises.getAllExercises();
+            currentExercises.reverse()
             setCards(currentExercises);
         }
-    }, [modalVisible || props.fetchTrigger || fetchTrigger])
+    }, [modalVisible,props.fetchTrigger,fetchTrigger])
 
 
     return (

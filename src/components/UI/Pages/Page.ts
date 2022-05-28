@@ -5,7 +5,7 @@ interface PageProps {
 }
 
 export const HomePage = styled.div`
-height: 90vh;
+height: 100vh;
 overflow-y: scroll;
 /* position: relative; */
 z-index: 1;

@@ -85,9 +85,13 @@ export default function AddSyllabusScoreGrades(props) {
         setScoreGrades(syllabus.getScoreGrades())
         setScoreGradesX(syllabus.getScoreGrades())
     },[])
+
     const editFormValues = (e) => {
         let values = e.target.getAttribute("data-edit-value")
         FormHandler.editFormValues(JSON.parse(values))
+        if(values){
+            document.getElementById(Pages.ADD_SCORE_GRADES).scrollTo(0,0);
+           } 
         setScoreGradeID(e.target.id)
     }
 
@@ -140,12 +144,23 @@ export default function AddSyllabusScoreGrades(props) {
             title: "",
             dataIndex: "",
             key: "",
-            render: (text) => <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+            render: value => <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div id={value.id} style={{ position: "absolute", zIndex: 3, height: 20, width: 20 }} onClick={deleteScoreGrade}>
+                    </div>
+                
                 <IoTrashBin style={{ fontSize: 20, color: Colors.RED_PRIMARY }} />
             </div>
         }
 
     ];
+
+    const deleteScoreGrade = (e) => {
+        let deleteID = Number(e.target.id)
+        let currentCards = scoreGradesX;
+        currentCards =  currentCards.filter(x=> x.getID() !== deleteID);
+        setScoreGrades(currentCards)
+        setFetchTrigger(Math.random())
+    }
 
     const [showError, setShowError] = useState(false);
     const [percentageArray, setPercentageArray] = useState(Array.from({ length: 101 }, (v, i) => i))
@@ -166,15 +181,20 @@ export default function AddSyllabusScoreGrades(props) {
             setShowError(false);
             // TODO: save the grading scores
             // syllabus.addScoreGrade()
+           let scoreGradesArray = []
             scoreGradesX.map(x=>{
-                syllabus.addScoreGrade(x)
-                studentClass.setSyllabus(syllabus)
-                db.modifyCollection(studentClass.getID(), studentClass)
+                scoreGradesArray.push(x)
             })
+            syllabus.setScoreGrades(scoreGradesArray)
+            studentClass.setSyllabus(syllabus)
+            db.modifyCollection(studentClass.getID(), studentClass)
+            props.onClick()
         }
         setPercentageArray(currentPercentageArray)
-
     }
+    
+
+
 
     return (
         <Page zIndex={3}  className="animate__animated animate__fadeInRight animate__faster">
@@ -184,7 +204,7 @@ export default function AddSyllabusScoreGrades(props) {
                 <Info info content={`You are now adding grade cut offs for ${studentClass.getTitle()}, ${studentClass.getGrade()}`} />
                 <Form>
                     <InputField label={"Grade"} required />
-                    <InputField label="Minimum Score" required type="number" />
+                    <InputField label="Minimum Score" required type="number"  />
                     <InputField label="Maximum Score" required type="number" />
                     <FlexRow center>
                         <IconButton left add secondary title="add" id="form_button" onClick={getFormValues} />

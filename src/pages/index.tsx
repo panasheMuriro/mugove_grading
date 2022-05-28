@@ -132,6 +132,8 @@ export default function MainPage() {
   const onPageClosed = () => {
     // ADD ANIMATION
     console.log("clicked")
+
+
     setFetchTrigger(Math.random())
 
     if (showAboutPage) {
@@ -152,6 +154,7 @@ export default function MainPage() {
       setTimeout(() => {
         setShowScoreGradesPage(false);
       }, 800)
+
     }
     else if (showSyllabusPage) {
       let currentClass = document.getElementById(Pages.ADD_SYLLABUS_PAGE).className
@@ -234,8 +237,16 @@ export default function MainPage() {
         setShowStudentClassPage(false);
       }, 800)
     }
+
+    setCardEditID("") // clear the card edit id
+    setExerciseCardDeleteID("") // clear the card delete id 
   }
 
+
+  useEffect(()=>{
+    console.log(cardDeleteID)
+    console.log(cardDeleteID)
+  },[cardEditID, exerciseCardDeleteID])
 
 
   const handleExerciseTooltipVisibility = (e) => {

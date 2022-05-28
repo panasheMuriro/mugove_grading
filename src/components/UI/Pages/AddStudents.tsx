@@ -175,6 +175,9 @@ export default function AddStudents(props) {
         setStudentEditID(e.target.id)
         let values = e.target.getAttribute("data-edit-value")
         FormHandler.editFormValues(JSON.parse(values))
+        if(values){
+            document.getElementById(Pages.ADD_STUDENTS_PAGE).scrollTo(0,0);
+           } 
     }
 
     const deleteStudent = (e) => {
@@ -226,7 +229,7 @@ export default function AddStudents(props) {
             </Padding>
             <TableDisplay data={dataSource} columns={columns} />
             <Padding>
-                <PrimaryButton>Done</PrimaryButton>
+                <PrimaryButton onClick={props.onClick}>Done</PrimaryButton>
             </Padding>
         </Page>
         </>

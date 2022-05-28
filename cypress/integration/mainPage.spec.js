@@ -35,12 +35,6 @@ describe('Main Page test', () => {
     cy.get('#Title').type(`Mathematics`);
     cy.get('#Grade').type(`4C`);
     cy.contains('Submit').click();
-    cy.contains('Submit').should('not.exist');
-    cy.wait(1000)
-    cy.contains('Add').click();
-    cy.get('#Title').type(`Mathematics`);
-    cy.get('#Grade').type(`4C`);
-    cy.contains('Submit').click();
     cy.contains('Help').should('not.exist');
     cy.contains('Mathematics').should('exist')
     cy.contains('Please add syllabus').should('exist');

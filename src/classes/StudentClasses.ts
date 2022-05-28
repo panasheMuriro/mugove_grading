@@ -66,11 +66,14 @@ export class StudentClass {
 
     if (parsedData.syllabus && parsedData.syllabus.scoreGrades.length > 0) {
       let syllabus = studentClass.getSyllabus()
+
+      let scoreGrades = []
       parsedData.syllabus.scoreGrades.map(x => {
-        syllabus.addScoreGrade(
+      scoreGrades.push(
           new ScoreGrade(x.grade, x.minScore, x.maxScore, x.id)
         )
       })
+      syllabus.setScoreGrades(scoreGrades)
       studentClass.setSyllabus(syllabus)
     }
     studentClass.setHasSyllabus()
@@ -325,14 +328,22 @@ export class Syllabus {
     this.topics = []
   }
 
+  clearScoreGrades():void{
+    this.scoreGrades = [];
+  } 
+
   getScoreGrades(): Array<ScoreGrade> {
     return this.scoreGrades
   }
 
-  addScoreGrade(scoreGrade: ScoreGrade): void {
-    this.hasScoreGrades = true;
-    this.scoreGrades.push(scoreGrade)
+  setScoreGrades(scoreGrades: Array<ScoreGrade>):void{
+    this.scoreGrades = scoreGrades;
   }
+
+  // addScoreGrade(scoreGrade: ScoreGrade): void {
+  //   this.hasScoreGrades = true;
+  //   this.scoreGrades.push(scoreGrade)
+  // }
 
   getHasScoreGrades():boolean{
      this.setHasScoreGrades();

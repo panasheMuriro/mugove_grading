@@ -20,6 +20,7 @@ import html2canvas from "html2canvas"
 import Spinnder from '../Spinner';
 import Spinner from '../Spinner';
 import SubNav from '../Nav/SubNav';
+import Status from '../Status';
 
 
 const { Panel } = Collapse;
@@ -153,6 +154,10 @@ export default function OverallStudentScores(props) {
             title: 'Score',
             dataIndex: 'score',
             key: 'score',
+            sorter: (a, b) => a.score - b.score,
+            render:value => <FlexRow>
+                {value >= 50 ?<Status success/> : <Status danger/> }              {value}
+            </FlexRow>
         },
     ];
 
@@ -166,6 +171,10 @@ export default function OverallStudentScores(props) {
             title: '%Score',
             dataIndex: 'score',
             key: 'score',
+            sorter: (a, b) => a.score - b.score,
+            render:value => <FlexRow>
+            {value >= 50 ?<Status success/> : <Status danger/> }              {value}
+        </FlexRow>
         },
     ]
 
@@ -179,6 +188,10 @@ export default function OverallStudentScores(props) {
             title: '%Score',
             dataIndex: 'score',
             key: 'score',
+            sorter: (a, b) => a.score - b.score,
+            render:value => <FlexRow>
+            {value >= 50 ?<Status success/> : <Status danger/> }              {value}
+        </FlexRow>
         },
     ];
 
@@ -192,6 +205,10 @@ export default function OverallStudentScores(props) {
             title: '%Score',
             dataIndex: 'score',
             key: 'score',
+            sorter: (a, b) => a.score - b.score,
+            render:value => <FlexRow>
+            {value >= 50 ?<Status success/> : <Status danger/> }              {value}
+        </FlexRow>
         },
     ]
 
@@ -244,6 +261,10 @@ export default function OverallStudentScores(props) {
             title: '%Score',
             dataIndex: 'score',
             key: 'score',
+            sorter: (a, b) => a.score - b.score,
+            render:value => <FlexRow>
+            {value >= 50 ?<Status success/> : <Status danger/> }              {value}
+        </FlexRow>
         },
         {
             title: 'Grade',
@@ -264,7 +285,7 @@ export default function OverallStudentScores(props) {
             title: 'Count',
             dataIndex: 'count',
             key: 'count',
-            sorter: (a, b) => a - b
+            sorter: (a, b) => a.count - b.count
         },
     ]
 
@@ -338,10 +359,7 @@ export default function OverallStudentScores(props) {
     return (
         <>
         {showSubNav && <SubNav title="Student Scores" id={Pages.OVERALL_SCORES_PAGE + " subnav"} onClick={props.onClick}/>}
-
         <Page zIndex={3} onScroll={getScrollPosition} id={Pages.OVERALL_SCORES_PAGE} className="animate__animated animate__fadeInRight animate__faster">
-
-
             <NavHeader title="Student Scores" id={Pages.OVERALL_SCORES_PAGE + " nav"} onClick={props.onClick} showSubNav={showSubNav} />
             <Padding noVertical>
                 <H2 style={{ marginBottom: 0 }}>Overall Score</H2>

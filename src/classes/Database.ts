@@ -13,6 +13,9 @@ export class DB {
       }else{
         if(isBrowser){
         this.localStorage = localStorage;
+        if(!this.localStorage.getItem(this.name)){
+          this.localStorage.setItem(this.name, '{}')
+        }
         }
       }
 

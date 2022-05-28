@@ -11,6 +11,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import TableDisplay from '../DataDisplay/Table';
 import { Colors } from '../Colors';
 import SubNav from '../Nav/SubNav';
+import Status from '../Status';
 
 export default function IndividualStudentScore(props) {
     let db = new DB();
@@ -46,6 +47,10 @@ export default function IndividualStudentScore(props) {
             title: '%Score',
             dataIndex: 'score',
             key: 'score',
+            sorter: (a, b) => a.score - b.score,
+            render: value => <FlexRow>
+                {value >= 50 ? <Status success /> : <Status danger />}              {value}
+            </FlexRow>
         },
     ]
 
@@ -53,9 +58,9 @@ export default function IndividualStudentScore(props) {
     let currentScoresByTopics = individualScores.getScoresByTopic();
     let scoresByTopic = [];
     let gradingSchemeTopicsScores = gradingScheme.getGradingSchemeTopicsScores();
-    for(let key of gradingSchemeTopicsScores.keys()){
-        let score = ( (currentScoresByTopics.get(key) / gradingSchemeTopicsScores.get(key)) *100).toFixed(2);
-        scoresByTopic.push({topic: key, score});
+    for (let key of gradingSchemeTopicsScores.keys()) {
+        let score = ((currentScoresByTopics.get(key) / gradingSchemeTopicsScores.get(key)) * 100).toFixed(2);
+        scoresByTopic.push({ topic: key, score });
     }
 
     const columnsTopic = [
@@ -68,63 +73,68 @@ export default function IndividualStudentScore(props) {
             title: '%Score',
             dataIndex: 'score',
             key: 'score',
+            sorter: (a, b) => a.score - b.score,
+            render: value => <FlexRow>
+            {value >= 50 ? <Status success /> : <Status danger />}              {value}
+        </FlexRow>
         },
+   
     ]
 
 
     const [showSubNav, setShowSubNav] = useState(false);
     const getScrollPosition = (e) => {
-        let navBarPosition = document.getElementById(e.target.id+" nav").getBoundingClientRect().top;
+        let navBarPosition = document.getElementById(e.target.id + " nav").getBoundingClientRect().top;
         setShowSubNav(false)
         if (navBarPosition < -125) {
-          setShowSubNav(true)
+            setShowSubNav(true)
         }
     }
-    
+
 
     return (
         <>
-        {showSubNav && <SubNav title="Student Score" id={Pages.INDIVIDUAL_SCORES_PAGE+" subnav"} onClick={props.onClick} />}
-        <Page zIndex={4} onScroll={getScrollPosition} id={Pages.INDIVIDUAL_SCORES_PAGE}  className="animate__animated animate__fadeInRight animate__faster">
-            <NavHeader title="Student Score" id={Pages.INDIVIDUAL_SCORES_PAGE+" nav"} onClick={props.onClick} showSubNav={showSubNav} />
-            <Padding noVertical>
-                <P3>You are viewing scores for, </P3>
-                <H2 style={{ margin: 0 }}>{studentName}</H2>
-            </Padding>
-            <Padding>
-                <FlexRow between>
-                    <FlexColumn center style={{ fontFamily: "StolzlMedium", height: 130, width: 130, justifyContent: "center" }}
-                    >
-                        <CircularProgressbar value={individualScores.getPercentageScore()} text={`${individualScores.getPercentageScore()}`}
-                            background
-                            backgroundPadding={5}
-                            styles={{ background: { fill:individualScores.getPercentageScore() >= 50?  Colors.TEAL_PRIMARY : Colors.RED_PRIMARY }, text: { fill: "#fff" }, trail: { stroke: individualScores.getPercentageScore() >= 50?  Colors.TEAL_PRIMARY : Colors.RED_PRIMARY }, path: { stroke: "#fff" } }}
-                        />
-                    </FlexColumn>
-                    <FlexColumn style={{ marginLeft: 20, justifyContent: 'center' }}>
-                        <P2 style={{ margin: "8px 0" }}>Total Points Achieved: {individualScores.getTotalPointsAchieved()}</P2>
-                        <P2>Max Points Possible: {individualScores.getMaxPointsPossible()} </P2>
-                    </FlexColumn>
-                </FlexRow>
-            </Padding>
-            {/* Highlight the student's percentage on the bar graph */}
+            {showSubNav && <SubNav title="Student Score" id={Pages.INDIVIDUAL_SCORES_PAGE + " subnav"} onClick={props.onClick} />}
+            <Page zIndex={4} onScroll={getScrollPosition} id={Pages.INDIVIDUAL_SCORES_PAGE} className="animate__animated animate__fadeInRight animate__faster">
+                <NavHeader title="Student Score" id={Pages.INDIVIDUAL_SCORES_PAGE + " nav"} onClick={props.onClick} showSubNav={showSubNav} />
+                <Padding noVertical>
+                    <P3>You are viewing scores for, </P3>
+                    <H2 style={{ margin: 0 }}>{studentName}</H2>
+                </Padding>
+                <Padding>
+                    <FlexRow between>
+                        <FlexColumn center style={{ fontFamily: "StolzlMedium", height: 130, width: 130, justifyContent: "center" }}
+                        >
+                            <CircularProgressbar value={individualScores.getPercentageScore()} text={`${individualScores.getPercentageScore()}`}
+                                background
+                                backgroundPadding={5}
+                                styles={{ background: { fill: individualScores.getPercentageScore() >= 50 ? Colors.TEAL_PRIMARY : Colors.RED_PRIMARY }, text: { fill: "#fff" }, trail: { stroke: individualScores.getPercentageScore() >= 50 ? Colors.TEAL_PRIMARY : Colors.RED_PRIMARY }, path: { stroke: "#fff" } }}
+                            />
+                        </FlexColumn>
+                        <FlexColumn style={{ marginLeft: 20, justifyContent: 'center' }}>
+                            <P2 style={{ margin: "8px 0" }}>Total Points Achieved: {individualScores.getTotalPointsAchieved()}</P2>
+                            <P2>Max Points Possible: {individualScores.getMaxPointsPossible()} </P2>
+                        </FlexColumn>
+                    </FlexRow>
+                </Padding>
+                {/* Highlight the student's percentage on the bar graph */}
 
-            <Padding>
-                <H2 style={{ margin: 0 }}>Scores By Question</H2>
-            </Padding>
+                <Padding>
+                    <H2 style={{ margin: 0 }}>Scores By Question</H2>
+                </Padding>
 
-            <TableDisplay columns={columnsQuestion} data={scoresByQuestion} />
-
-
-            <Padding>
-                <H2 style={{ margin: 0 }}>Scores By Topic</H2>
-            </Padding>
-
-            <TableDisplay columns={columnsTopic} data={scoresByTopic} />
+                <TableDisplay columns={columnsQuestion} data={scoresByQuestion} />
 
 
+                <Padding>
+                    <H2 style={{ margin: 0 }}>Scores By Topic</H2>
+                </Padding>
 
-        </Page>
+                <TableDisplay columns={columnsTopic} data={scoresByTopic} />
+
+
+
+            </Page>
         </>
     )
 }

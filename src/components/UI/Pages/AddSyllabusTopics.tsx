@@ -80,6 +80,9 @@ export default function AddSyllabusTopics(props) {
     const editFormValues = (e) => {
         let values = e.target.getAttribute("data-edit-value")
         FormHandler.editFormValues(JSON.parse(values))
+       if(values){
+        document.getElementById(Pages.ADD_SYLLABUS_PAGE).scrollTo(0,0);
+       } 
         setTopicID(e.target.id);
     }
 
