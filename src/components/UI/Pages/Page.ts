@@ -9,6 +9,7 @@ height: 100vh;
 overflow-y: scroll;
 /* position: relative; */
 z-index: 1;
+padding-bottom: 100px;
 `
 
 export const Page = styled.div<PageProps>`
