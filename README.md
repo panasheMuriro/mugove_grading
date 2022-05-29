@@ -77,3 +77,7 @@ After decomposing the problem, the class diagrams for the app were created using
 Wireframes were also done using [draw.io](https://app.diagrams.net/)
 
 ![mugove_grading_wireframes](https://user-images.githubusercontent.com/87081585/170874190-bf522c4e-ea12-4287-bb59-f83b014de975.jpg)
+
+### [WIP] UI Design
+Adobe XD was ued to desing the UI.
+
