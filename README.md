@@ -71,6 +71,9 @@ Below are the use case steps, where the main step is numbered, and the  alternat
 
 After decomposing the problem, the class diagrams for the app were created using [draw.io](https://app.diagrams.net/)
 
+![mugove_class_diagrams_compressed](https://user-images.githubusercontent.com/87081585/170874179-d012b273-0c39-40bb-9626-82a51b78bd6c.jpg)
 
 ### Wireframes
 Wireframes were also done using [draw.io](https://app.diagrams.net/)
+
+![mugove_grading_wireframes](https://user-images.githubusercontent.com/87081585/170874190-bf522c4e-ea12-4287-bb59-f83b014de975.jpg)
