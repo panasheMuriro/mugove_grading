@@ -70,6 +70,9 @@ export default function CardCollector(props) {
     useEffect(() => {
         if (props.cardDeleteID) {
             document.getElementById("main_page").scrollTo(0,0)
+            if(document.querySelector('.ant-popover')){
+                document.querySelector('.ant-popover').style.visibility = 'hidden'
+            }
             setDeletePopupVisible(true);
         }
     }, [props.deleteTrigger])
@@ -77,6 +80,9 @@ export default function CardCollector(props) {
     useEffect(() => {
         if (props.exerciseCardDeleteID) { //FIXME: this id is from the student class
             document.getElementById(Pages.STUDENT_CLASS_PAGE).scrollTo(0,0)
+            if(document.querySelector('.ant-popover')){
+                document.querySelector('.ant-popover').style.visibility = 'hidden'
+            }
             setExerciseDeletePopupVisible(true);
         }
     }, [props.exerciseDeleteTrigger])

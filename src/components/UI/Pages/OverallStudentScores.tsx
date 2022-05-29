@@ -21,6 +21,7 @@ import Spinnder from '../Spinner';
 import Spinner from '../Spinner';
 import SubNav from '../Nav/SubNav';
 import Status from '../Status';
+import Popup from '../Popup';
 
 
 const { Panel } = Collapse;
@@ -329,26 +330,27 @@ export default function OverallStudentScores(props) {
                 count += 1
                 height -= window.screen.height
             }
-            doc.save(`Mugove Scores for ${exercise} ${date.toDateString()} ${date.toLocaleTimeString()}.pdf`)
+            doc.save(`Mugove Scores for ${exercise.getTitle()} for class ${studentClass.getTitle()}_${studentClass.getGrade()} ${date.toDateString()} ${date.toLocaleTimeString()}.pdf`)
             setShowDownloadDiv(false)
+            setShowPopup(true)
         }
     }
 
     const [showDownloadDiv, setShowDownloadDiv] = useState(false);
 
     const downloadScores = async () => {
-        document.getElementById(Pages.OVERALL_SCORES_PAGE).scrollTo(0, 0)
         setShowDownloadDiv(true)
-
         setTimeout(async () => {
             await generateScorePDF(exportRef.current);
         }, 500)
         setShowSpinner(false)
-
     }
+
+    const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
         if (showDownloadDiv) {
+            document.getElementById(Pages.OVERALL_SCORES_PAGE).scrollTo(0, 0)
             setShowSpinner(true)
         }else{
             setShowSpinner(false)
@@ -359,6 +361,8 @@ export default function OverallStudentScores(props) {
     return (
         <>
         {showSubNav && <SubNav title="Student Scores" id={Pages.OVERALL_SCORES_PAGE + " subnav"} onClick={props.onClick}/>}
+        { showPopup &&<Popup id={Pages.OVERALL_SCORES_PAGE} onClick={()=>{setShowPopup(false)}} success title="Download Successful" message="You have downloaded the scores PDF, you will see it in your downloads folder. The file name starts with 'Mugove Scores'" buttonTitle="Ok" />}
+       
         <Page zIndex={3} onScroll={getScrollPosition} id={Pages.OVERALL_SCORES_PAGE} className="animate__animated animate__fadeInRight animate__faster">
             <NavHeader title="Student Scores" id={Pages.OVERALL_SCORES_PAGE + " nav"} onClick={props.onClick} showSubNav={showSubNav} />
             <Padding noVertical>

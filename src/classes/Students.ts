@@ -59,9 +59,9 @@ export class StudentID{
         this.dateOfBirth = dateOfBirth;
     }
 
-    static fromJSON(data:string){
-        let parsedData = JSON.parse(data);
-    }
+    // static fromJSON(data:string){
+    //     let parsedData = JSON.parse(data);
+    // }
 
     getFullName():string{
         let middleNames = "";

@@ -16,7 +16,7 @@ export default function NavHeader(props) {
         title = title.substring(0, 18) + "..."
     }
 
-    const getGreeting = ():string => {
+    const getGreeting = ():string => { // Time is not updated
         let greeting: string;
         let date = new Date()
         let hour = date.getHours();
@@ -32,13 +32,14 @@ export default function NavHeader(props) {
     }
 
     let messages = [
-        getGreeting(),
+        "Welcome to, ",
         "Analyse students' performance with ease.",
         "Prioritize monitoring student scores",
-        "See which topics need attention."
+        "See which topics need attention.",
     ];
 
-    const [message, setMessage] = useState(getGreeting());
+    const [message, setMessage] = useState("Welcome to, ");
+
     useEffect(()=>{
         let currentIndex = 0
         setInterval(()=>{
@@ -48,11 +49,8 @@ export default function NavHeader(props) {
             }else{
                 currentIndex = 0
             }
-        },5000)
-
+        },4000)
     },[])
-
-
 
     return (
         <div>
