@@ -105,11 +105,12 @@ export default function MainPage() {
 
     let id = e.target.id
     // handle the individual student scores
-    if (id == Pages.INDIVIDUAL_SCORES_PAGE) {
+    if("student_score_name"){
       let studentID = e.target.getAttribute("data-student-id")
       setSelectedStudentID(studentID)
       setShowIndividualScoresPage(true)
-    } else if (id == Pages.ADD_SYLLABUS_PAGE) {
+    }
+     else if (id == Pages.ADD_SYLLABUS_PAGE) {
       setShowSyllabusPage(true);
     } else if (id == Pages.ADD_STUDENTS_PAGE) {
       setShowStudentsPage(true);
@@ -170,7 +171,9 @@ export default function MainPage() {
     else if (showIndividualScoresPage) {
       let currentClass = document.getElementById(Pages.INDIVIDUAL_SCORES_PAGE).className
       currentClass += " animate__animated animate__slideOutRight animate__faster"
+
       document.getElementById(Pages.INDIVIDUAL_SCORES_PAGE).className = currentClass
+
       if (document.getElementById(Pages.INDIVIDUAL_SCORES_PAGE + " subnav")) {
         document.getElementById(Pages.INDIVIDUAL_SCORES_PAGE + " subnav").style.display = "none"
       }

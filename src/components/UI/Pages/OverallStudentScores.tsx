@@ -177,7 +177,7 @@ export default function OverallStudentScores(props) {
             {value >= 50 ?<Status success/> : <Status danger/> }              {value}
         </FlexRow>
         },
-    ]
+    ];
 
     const columnsOverallTopicScores = [
         {
@@ -256,7 +256,10 @@ export default function OverallStudentScores(props) {
             title: 'Name',
             dataIndex: '',
             key: 'studentName',
-            render: value => <div style={{ color: Colors.TEAL_PRIMARY }} data-student-id={value.studentID} id={Pages.INDIVIDUAL_SCORES_PAGE} onClick={props.onComponentSwitched}>{value.studentName}</div>
+            render: value => <div style={{ color: Colors.TEAL_PRIMARY }} data-student-id={value.studentID} id="student_score_name" onClick={props.onComponentSwitched}>
+                {value.studentName}
+
+                </div>
         },
         {
             title: '%Score',
