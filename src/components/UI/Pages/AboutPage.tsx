@@ -29,7 +29,6 @@ export default function AboutPage(props) {
 
             <P2>
                Mugove Grading applciation is just the right tool for this. The teacher will need to do the following few steps:
-                 
             </P2>
             
             <Padding style={{backgroundColor:Colors.GREY_SECONDARY, borderRadius: 30, marginBottom: 10}}>           
