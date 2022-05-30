@@ -353,7 +353,9 @@ export default function OverallStudentScores(props) {
 
     useEffect(() => {
         if (showDownloadDiv) {
-            document.getElementById(Pages.OVERALL_SCORES_PAGE).scrollTo(0, 0)
+            setTimeout(()=> {
+                document.getElementById(Pages.OVERALL_SCORES_PAGE).scrollTo(0, 0)
+            },500)
             setShowSpinner(true)
         }else{
             setShowSpinner(false)
